@@ -1,5 +1,13 @@
+let currentTask=null;
 function func(){
  let a=(document.getElementById("input1").value);
+ 
+ if (currentTask) {      
+    currentTask.firstChild.textContent = a;
+    currentTask = null;
+    document.getElementById("input1").value = "";
+    return;
+}
  let taskli=document.createElement("li");
  let delt=document.createElement("button");
  let mark=document.createElement("button");
@@ -14,12 +22,10 @@ delt.onclick=function(){
 mark.onclick=function(){
 taskli.classList.toggle("mark");
 }
-edit.onclick=function(){
-     
-
+edit.onclick = function () {
+     document.getElementById("input1").value = taskli.firstChild.textContent;
+    currentTask = taskli;
 }
-
- 
  if(a){
 document.getElementById("list").appendChild(taskli);
 taskli.appendChild(delt);
@@ -32,3 +38,4 @@ document.getElementById("input1").value="";
     }
    
  }
+
